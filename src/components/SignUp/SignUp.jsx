@@ -18,6 +18,9 @@ const SignUp = () => {
       setError("password not valid need 8 char ");
       return;
     }
+    if(!email){
+        setError("Enter A Valid Email")
+    }
     if ((name, email, password)) {
       registerUser(email, password)
         .then((result) => {
@@ -35,18 +38,18 @@ const SignUp = () => {
                 <label className="label">
                     <span className="label-text">Name</span>
                 </label>
-                <input onChange={(e) => setName(e.target.value)} 
+                <input required onChange={(e) => setName(e.target.value)} 
                 type="text" 
                 placeholder="Type Name" 
-                className="input input-bordered w-full max-w-xs" required />
+                className="input input-bordered w-full max-w-xs"  />
                 <label className="label">
                     <span className="label-text">Email</span>
                 </label>
-                <input onChange={(e) => setEmail(e.target.value)}
+                <input required onChange={(e) => setEmail(e.target.value)}
                 type="email" 
                 placeholder="Type Email" 
                 className="input input-bordered w-full max-w-xs" />
-                <label className="label" required>
+                <label className="label" >
                     <span className="label-text">Password</span>
                 </label>
                 <input onChange={(e) => setPassword(e.target.value)}
