@@ -43,8 +43,6 @@ const router = createBrowserRouter([
         element: <ChefInfo></ChefInfo>,
         loader: ({params})=> fetch(`http://localhost:5000/chefInfo/${params.id}`)
       },
-
-
     ]
   },
 ]);
