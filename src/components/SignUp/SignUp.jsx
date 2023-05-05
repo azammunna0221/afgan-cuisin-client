@@ -12,6 +12,7 @@ const SignUp = () => {
   const [error, setError] = useState("");
 
   const handleRegistration = (event) => {
+    setError("");
     event.preventDefault();
     if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
       setError("password not valid need 8 char ");
@@ -23,6 +24,7 @@ const SignUp = () => {
           console.log(result.user);
         })
         .catch((err) => {
+            setError(err.message);
           console.log(err.message);
         });
     }

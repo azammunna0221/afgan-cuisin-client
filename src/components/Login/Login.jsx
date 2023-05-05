@@ -1,18 +1,49 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../provider/AuthProvider';
 
 const Login = () => {
+    const { loginUser } = useContext(AuthContext);
+  // const location = useLocation();
+  // const history = useHistory();
+  // let navigate = useNavigate();
+  
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+    if ((email, password)) {
+      loginUser(email, password)
+        .then((result) => {
+          console.log(result.user);
+          // navigate("/");
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
+  };
+
+
     return (
         <div className="flex justify-center">
             <div className="form-control w-full max-w-xs">
                 <label className="label">
                     <span className="label-text">Email</span>
                 </label>
-                <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" />
+                <input onChange={(e) => setEmail(e.target.value)}
+                type="email" 
+                placeholder="Type Email" 
+                className="input input-bordered w-full max-w-xs" required />
                 <label className="label">
                     <span className="label-text">Password</span>
                 </label>
-                <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" />
+                <input onChange={(e) => setPassword(e.target.value)} 
+                type="password" 
+                placeholder="Enter Password" 
+                className="input input-bordered w-full max-w-xs" />
                 <button className="btn btn-primary mt-4">Login</button>
                 <div className='flex flex-row gap-2'>
                 <button className="basis-2/4 btn btn-outline mt-4">Gmail</button>
