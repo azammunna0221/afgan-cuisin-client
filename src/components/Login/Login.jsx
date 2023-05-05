@@ -1,9 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { GithubAuthProvider, GoogleAuthProvider, getAuth, signInWithPopup, signOut } from "firebase/auth";
 import { AuthContext } from '../../provider/AuthProvider';
+import app from '../../firebase/firebase.init';
 
 const Login = () => {
-    const { loginUser } = useContext(AuthContext);
+  const { loginUser } = useContext(AuthContext);
   
 
   const [email, setEmail] = useState("");
@@ -22,6 +24,47 @@ const Login = () => {
         });
     }
   };
+
+  const [user, setUser] = useState();
+  const provider = new GoogleAuthProvider();
+  const gitProvider = new GithubAuthProvider();
+  const auth = getAuth(app);
+
+  const clickToLogin = () => {
+      signInWithPopup(auth, provider)
+          .then(result => {
+              const userLogged = result.user;
+              console.log(userLogged);
+              setUser(userLogged);
+          })
+          .catch(error => {
+              const errorMassage = ('Error', error.massage)
+          })
+  }
+
+  const clickToGitLogin = () => {
+      signInWithPopup(auth, gitProvider)
+          .then(result => {
+              const signedUser = result.user;
+              setUser(signedUser);
+          })
+          .catch(error => {
+              console.log(error);
+          })
+  }
+
+  const clickSignOut = () => {
+      signOut(auth)
+          .then(result => {
+              setUser(null);
+          })
+          .catch(error => {
+              console.log(error);
+          })
+  }
+
+
+
 
     return (
         <div className="flex justify-center">
@@ -42,8 +85,8 @@ const Login = () => {
                 className="input input-bordered w-full max-w-xs" />
                 <button onClick={handleLogin} className="btn btn-primary mt-4">Login</button>
                 <div className='flex flex-row gap-2'>
-                <button className="basis-2/4 btn btn-outline mt-4">Gmail</button>
-                <button className="basis-2/4 btn btn-outline mt-4">Github</button>
+                <button onClick={clickToLogin} className="basis-2/4 btn btn-outline mt-4">Gmail</button>
+                <button onClick={clickToGitLogin} className="basis-2/4 btn btn-outline mt-4">Github</button>
                 </div>
                 <small className='pt-4'>if not Registered ? <Link to="/signUp" className=" text-blue-700">Sign-Up</Link> </small>
             </div>

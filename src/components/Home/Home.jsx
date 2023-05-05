@@ -43,6 +43,10 @@ const Home = () => {
                     </div>
                 </div>
             </div>
+            <div>
+                <h1 className=' font-bold text-center text-4xl text-slate-800 pb-5'>We Specialize in Intimate <br /> Catering</h1>
+                <p className='py-5 text-center text-slate-800'>Think back to your last party. It was probably a great time with amazing friends.</p>
+            </div>
             <div className=' grid grid-cols-3 gap-4'>
                 {
                     chefData.map(chef => <Chefs
