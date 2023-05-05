@@ -12,6 +12,7 @@ import SignUp from './components/SignUp/SignUp.jsx';
 import Login from './components/Login/Login.jsx';
 import Blogs from './components/Blogs/Blogs.jsx';
 import AuthProvider from './provider/AuthProvider.jsx';
+import ChefInfo from './components/ChefInfo/ChefInfo.jsx';
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,13 @@ const router = createBrowserRouter([
       {
         path: "/blogs",
         element: <Blogs></Blogs>,
-      }
+      },
+      {
+        path: "/chefInfo/:id",
+        element: <ChefInfo></ChefInfo>,
+        loader: ({params})=> fetch(`http://localhost:5000/chefInfo/${params.id}`)
+      },
+
 
     ]
   },

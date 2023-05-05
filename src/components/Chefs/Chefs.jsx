@@ -1,6 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Chefs = ({ chef }) => {
+
+
     return (
         <div>
             <div>
@@ -12,7 +15,7 @@ const Chefs = ({ chef }) => {
                         <p>Number Of Recipes : {chef.num_of_recipes}</p>
                         <p>Likes : {chef.likes}</p>
                         <div className="card-actions justify-end">
-                            <button className="btn btn-primary">View Recipes</button>
+                            <Link to ={`/chefInfo/${chef.id}`}> <button className='btn btn-primary'>View Details</button> </Link>
                         </div>
                     </div>
                 </div>
